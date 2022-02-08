@@ -115,7 +115,7 @@ def predict_salary(salary_from, salary_to):
         return (salary_from + salary_to) / 2
 
 
-def get_table(language, title):
+def get_table(languages, title):
     table_colums = [
         [
             'Язык програмированния',
@@ -124,7 +124,7 @@ def get_table(language, title):
             'Средняя зарплата',
         ]
     ]
-    for language, language_data in language.items():
+    for language, language_data in languages.items():
         programming_language = list()
         programming_language.append(language)
         for data in language_data.values():
@@ -160,8 +160,8 @@ def main():
         sj_vacancy = sj_vacansies(sj_pages)
         hh_ru_language.update({language: hh_ru_vacancy})
         sj_language.update({language: sj_vacancy})
-    print(get_table(hh_ru_language, title='HeadHunter Moscow'))
-    print(get_table(sj_language, title='SuperJob Moscow'))
+    print(get_table(hh_ru_languages, title='HeadHunter Moscow'))
+    print(get_table(sj_languages, title='SuperJob Moscow'))
 
 
 if __name__ == '__main__':
