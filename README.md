@@ -10,6 +10,7 @@ pip install -r requirements.txt
 ```
 Скрипт использует закрытый ключ к API сервиса [SuperJob](https://russia.superjob.ru/).
 Для получения API нужно зарегистрироваться, затем используйте файл `.env`.
+
 Пример файла `.env`:
 
 ```
