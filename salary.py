@@ -135,8 +135,8 @@ def get_table(languages, title):
 
 
 def main():
-    hh_ru_language = dict()
-    sj_language = dict()
+    hh_ru_languages = dict()
+    sj_languages = dict()
     load_dotenv()
     api_sj = os.getenv('API_SUPERJOB')
     languages = [
@@ -158,8 +158,8 @@ def main():
         sj_pages = get_sj_pages(sj_url, language, api_sj)
         hh_ru_vacancy = hh_ru_vacansies(hh_ru_pages)
         sj_vacancy = sj_vacansies(sj_pages)
-        hh_ru_language.update({language: hh_ru_vacancy})
-        sj_language.update({language: sj_vacancy})
+        hh_ru_languages.update({language: hh_ru_vacancy})
+        sj_languages.update({language: sj_vacancy})
     print(get_table(hh_ru_languages, title='HeadHunter Moscow'))
     print(get_table(sj_languages, title='SuperJob Moscow'))
 
