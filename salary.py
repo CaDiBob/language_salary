@@ -127,11 +127,11 @@ def get_table(language, title):
         ]
     ]
     for language, language_data in language.items():
-        data_for_one_language = list()
-        data_for_one_language.append(language)
+        programming_language = list()
+        programming_language.append(language)
         for data in language_data.values():
-            data_for_one_language.append(data)
-        table_colums.append(data_for_one_language)
+            programming_language.append(data)
+        table_colums.append(programming_language)
     table = AsciiTable(table_colums, title)
     return table.table
 
