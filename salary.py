@@ -3,44 +3,43 @@ import requests
 import statistics
 
 from dotenv import load_dotenv
-from itertools import count
 from statistics import mean
 from terminaltables import AsciiTable
 
 
 def get_hh_ru_pages(language, url):
     hh_ru_pages = list()
-    for page in range(70):
+    for page in range(1):
         params = {
             'text': f'NAME:Программист {language}',
             'area': 1, # id г.Москва в запросах к HeadHunter API
             'period': 30,
             'page': page,
         }
-        page_response = requests.get(url, params=params)
-        page_response.raise_for_status()
-        page_data = page_response.json()
-        hh_ru_pages.append(page_data)
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        response = response.json()
+        hh_ru_pages.append(response)
     return hh_ru_pages
 
 
 def get_sj_pages(language, api_sj, url):
     headers = {'X-Api-App-Id': api_sj}
     superjob_pages = list()
-    for page in range(15):
+    for page in range(1):
         params = {
             'town': 'Москва',
             'keyword': f'Программист {language}',
             'page': page,
         }
-        page_response = requests.get(
+        response = requests.get(
             url,
             headers=headers,
             params=params,
         )
-        page_response.raise_for_status()
-        page_data = page_response.json()
-        superjob_pages.append(page_data)
+        response.raise_for_status()
+        response = response.json()
+        superjob_pages.append(response)
     return superjob_pages
 
 
@@ -103,12 +102,12 @@ def predict_rub_salary_sj(vacancy):
 
 
 def predict_salary(salary_from, salary_to):
-    if not salary_from:
-        return salary_to * 0.8
-    if not salary_to:
-        return salary_from * 1.2
-    else:
+    if salary_from and salary_to:
         return (salary_from + salary_to) / 2
+    if salary_from:
+        return salary_from * 1.2
+    if salary_to:
+        return salary_to * 0.8
 
 
 def get_table(languages, title):
@@ -120,11 +119,11 @@ def get_table(languages, title):
             'Средняя зарплата',
         ]
     ]
-    for language, language_data in languages.items():
+    for language, language_statistics in languages.items():
         programming_language = list()
         programming_language.append(language)
-        for data in language_data.values():
-            programming_language.append(data)
+        for statistic in language_statistics.values():
+            programming_language.append(statistic)
         table_colums.append(programming_language)
     table = AsciiTable(table_colums, title)
     return table.table
