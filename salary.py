@@ -12,7 +12,7 @@ def get_hh_ru_pages(language, url):
     for page in range(50):
         params = {
             'text': f'NAME:Программист {language}',
-            'area': 1, # id г.Москва в запросах к HeadHunter API
+            'area': 1,  # id г.Москва в запросах к HeadHunter API
             'period': 30,
             'page': page,
         }
@@ -148,7 +148,7 @@ def main():
     for language in languages:
         try:
             hh_ru_pages = get_hh_ru_pages(
-                language, 
+                language,
                 url='https://api.hh.ru/vacancies',
                 )
             sj_pages = get_sj_pages(
