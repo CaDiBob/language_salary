@@ -8,9 +8,9 @@ from terminaltables import AsciiTable
 
 
 def get_hh_ru_pages(language):
-    url='https://api.hh.ru/vacancies'
+    url = 'https://api.hh.ru/vacancies'
     hh_ru_pages = list()
-    for page in range(50):
+    for page in range(2):
         params = {
             'text': f'NAME:Программист {language}',
             'area': 1,  # id г.Москва в запросах к HeadHunter API
@@ -19,16 +19,16 @@ def get_hh_ru_pages(language):
         }
         response = requests.get(url, params=params)
         response.raise_for_status()
-        response = response.json()
-        hh_ru_pages.append(response)
+        page_response = response.json()
+        hh_ru_pages.append(page_response)
     return hh_ru_pages
 
 
 def get_sj_pages(language, api_sj):
-    url='https://api.superjob.ru/2.0/vacancies/'
+    url = 'https://api.superjob.ru/2.0/vacancies/'
     headers = {'X-Api-App-Id': api_sj}
     superjob_pages = list()
-    for page in range(50):
+    for page in range(2):
         params = {
             'town': 'Москва',
             'keyword': f'Программист {language}',
@@ -40,8 +40,8 @@ def get_sj_pages(language, api_sj):
             params=params,
         )
         response.raise_for_status()
-        response = response.json()
-        superjob_pages.append(response)
+        page_response = response.json()
+        superjob_pages.append(page_response)
     return superjob_pages
 
 
