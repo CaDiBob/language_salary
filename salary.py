@@ -86,9 +86,7 @@ def get_sj_vacansies(sj_pages):
 
 def predict_rub_salary_hh(vacancy):
     salary = vacancy.get('salary')
-    if not salary:
-        return
-    if salary.get('currency') == 'RUR':   
+    if salary and salary.get('currency') == 'RUR':
         salary_from = salary.get('from')
         salary_to = salary.get('to')
         return predict_salary(salary_from, salary_to)
