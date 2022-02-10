@@ -10,7 +10,7 @@ from terminaltables import AsciiTable
 def get_hh_ru_pages(language):
     url = 'https://api.hh.ru/vacancies'
     hh_ru_pages = list()
-    for page in range(2):
+    for page in range(50):
         params = {
             'text': f'NAME:Программист {language}',
             'area': 1,  # id г.Москва в запросах к HeadHunter API
@@ -28,7 +28,7 @@ def get_sj_pages(language, api_sj):
     url = 'https://api.superjob.ru/2.0/vacancies/'
     headers = {'X-Api-App-Id': api_sj}
     superjob_pages = list()
-    for page in range(2):
+    for page in range(50):
         params = {
             'town': 'Москва',
             'keyword': f'Программист {language}',
