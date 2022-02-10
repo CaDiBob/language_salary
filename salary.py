@@ -7,7 +7,8 @@ from statistics import mean
 from terminaltables import AsciiTable
 
 
-def get_hh_ru_pages(language, url):
+def get_hh_ru_pages(language):
+    url='https://api.hh.ru/vacancies'
     hh_ru_pages = list()
     for page in range(50):
         params = {
@@ -23,7 +24,8 @@ def get_hh_ru_pages(language, url):
     return hh_ru_pages
 
 
-def get_sj_pages(language, api_sj, url):
+def get_sj_pages(language, api_sj):
+    url='https://api.superjob.ru/2.0/vacancies/'
     headers = {'X-Api-App-Id': api_sj}
     superjob_pages = list()
     for page in range(50):
@@ -147,15 +149,8 @@ def main():
     ]
     for language in languages:
         try:
-            hh_ru_pages = get_hh_ru_pages(
-                language,
-                url='https://api.hh.ru/vacancies',
-                )
-            sj_pages = get_sj_pages(
-                language,
-                api_sj,
-                url='https://api.superjob.ru/2.0/vacancies/',
-                )
+            hh_ru_pages = get_hh_ru_pages(language)
+            sj_pages = get_sj_pages(language, api_sj)
             hh_ru_vacancy = get_hh_ru_vacansies(hh_ru_pages)
             sj_vacancy = get_sj_vacansies(sj_pages)
             hh_ru_languages.update({language: hh_ru_vacancy})
